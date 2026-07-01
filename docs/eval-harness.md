@@ -22,3 +22,13 @@ Metrics:
 - `latency_p50`
 - `latency_p95`
 - `human_override_rate`
+
+Run locally:
+
+```bash
+cd packages/evals
+python run_evals.py
+python -m pytest
+```
+
+The runner writes `latest-results.json`, which can be used by Engineering Mode or CI artifacts.
