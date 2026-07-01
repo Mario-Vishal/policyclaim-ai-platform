@@ -10,5 +10,29 @@
     "claim_id": "CLM-10484",
     "status": "Exception",
     "amount": 0
+  },
+  {
+    "payment_id": "PAY-8844",
+    "claim_id": "CLM-10485",
+    "status": "Matched",
+    "amount": 13750
+  },
+  {
+    "payment_id": "PAY-8845",
+    "claim_id": "CLM-10486",
+    "status": "Exception",
+    "amount": 0
+  },
+  {
+    "payment_id": "PAY-8846",
+    "claim_id": "CLM-10487",
+    "status": "Ready for disbursement",
+    "amount": 840
+  },
+  {
+    "payment_id": "PAY-8847",
+    "claim_id": "CLM-10488",
+    "status": "Hold",
+    "amount": 0
   }
 ]

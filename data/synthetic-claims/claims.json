@@ -14,5 +14,37 @@
     "state": "NV",
     "amount": 3100,
     "missing_documents": ["rental agreement", "police report"]
+  },
+  {
+    "claim_id": "CLM-10485",
+    "policy_id": "POL-TX-9033",
+    "loss_type": "Weather hail",
+    "state": "TX",
+    "amount": 14250,
+    "missing_documents": []
+  },
+  {
+    "claim_id": "CLM-10486",
+    "policy_id": "POL-FL-2290",
+    "loss_type": "Flood water intrusion",
+    "state": "FL",
+    "amount": 26600,
+    "missing_documents": ["cause of loss statement", "water line photos"]
+  },
+  {
+    "claim_id": "CLM-10487",
+    "policy_id": "POL-WA-6152",
+    "loss_type": "Glass repair",
+    "state": "WA",
+    "amount": 840,
+    "missing_documents": []
+  },
+  {
+    "claim_id": "CLM-10488",
+    "policy_id": "POL-IL-3817",
+    "loss_type": "Bodily injury liability",
+    "state": "IL",
+    "amount": 48500,
+    "missing_documents": ["medical bill summary", "liability statement"]
   }
 ]

@@ -31,12 +31,19 @@ def detect_missing_documents(claim_id: str) -> dict:
     missing = {
         "CLM-10482": ["repair estimate supplement"],
         "CLM-10484": ["rental agreement", "police report"],
+        "CLM-10486": ["cause of loss statement", "water line photos"],
+        "CLM-10488": ["medical bill summary", "liability statement"],
     }.get(claim_id, [])
     return {"tool": "detect_missing_documents", "claim_id": claim_id, "missing_documents": missing}
 
 
 def flag_underwriting_risk(claim_id: str) -> dict:
-    risk = {"CLM-10484": "High", "CLM-10482": "Medium"}.get(claim_id, "Low")
+    risk = {
+        "CLM-10484": "High",
+        "CLM-10486": "High",
+        "CLM-10482": "Medium",
+        "CLM-10488": "Medium",
+    }.get(claim_id, "Low")
     return {"tool": "flag_underwriting_risk", "claim_id": claim_id, "risk": risk}
 
 
@@ -45,6 +52,10 @@ def calculate_payment_status(claim_id: str) -> dict:
         "CLM-10482": "Pending reconciliation",
         "CLM-10483": "Matched",
         "CLM-10484": "Exception",
+        "CLM-10485": "Matched",
+        "CLM-10486": "Exception",
+        "CLM-10487": "Ready for disbursement",
+        "CLM-10488": "Hold",
     }.get(claim_id, "Unknown")
     return {"tool": "calculate_payment_status", "claim_id": claim_id, "payment_status": status}
 

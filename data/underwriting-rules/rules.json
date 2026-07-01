@@ -10,5 +10,23 @@
     "state": "NV",
     "risk_category": "high",
     "condition": "rental reimbursement claim without endorsement or agreement"
+  },
+  {
+    "rule_id": "RULE-FL-FLOOD-01",
+    "state": "FL",
+    "risk_category": "high",
+    "condition": "flood water intrusion with no covered collision event"
+  },
+  {
+    "rule_id": "RULE-WA-GLASS-01",
+    "state": "WA",
+    "risk_category": "low",
+    "condition": "glass-only repair with deductible waiver"
+  },
+  {
+    "rule_id": "RULE-IL-LIABILITY-01",
+    "state": "IL",
+    "risk_category": "medium",
+    "condition": "bodily injury claim pending medical bill and liability review"
   }
 ]

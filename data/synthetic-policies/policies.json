@@ -12,5 +12,33 @@
     "effective_date": "2026-03-01",
     "coverage": ["Liability", "Collision"],
     "exclusions": ["Rental reimbursement without endorsement"]
+  },
+  {
+    "policy_id": "POL-TX-9033",
+    "state": "TX",
+    "effective_date": "2026-02-10",
+    "coverage": ["Comprehensive", "Weather hail", "Roadside assistance"],
+    "exclusions": ["Pre-existing cosmetic damage"]
+  },
+  {
+    "policy_id": "POL-FL-2290",
+    "state": "FL",
+    "effective_date": "2026-04-20",
+    "coverage": ["Collision", "Comprehensive", "Liability"],
+    "exclusions": ["Flood water intrusion", "Named storm waiting period"]
+  },
+  {
+    "policy_id": "POL-WA-6152",
+    "state": "WA",
+    "effective_date": "2025-12-01",
+    "coverage": ["Glass repair", "Comprehensive", "Rental reimbursement"],
+    "exclusions": ["Aftermarket racing parts"]
+  },
+  {
+    "policy_id": "POL-IL-3817",
+    "state": "IL",
+    "effective_date": "2026-05-05",
+    "coverage": ["Liability", "Medical payments", "Uninsured motorist"],
+    "exclusions": ["Intentional acts", "Business livery use"]
   }
 ]

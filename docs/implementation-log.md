@@ -13,3 +13,4 @@
 - Final verification passed for web lint/build, Playwright happy path, .NET API xUnit tests, FastAPI pytest, eval harness pytest, live FastAPI `/health`, live `/rag/ask` fallback response with citations and trace, and Docker Compose config validation.
 - Installed .NET 8 SDK and Azure CLI locally with `winget`. The current Codex process may need absolute paths until its inherited PATH is refreshed, but new terminals should pick up the installers' PATH changes.
 - Fixed the API project so it no longer compiles nested test files as production source, and added an explicit xUnit import in the test file.
+- Expanded synthetic demo data across the web app, .NET API, FastAPI RAG chunks, AI tool mappings, and seed JSON files to cover more states, claim types, payment statuses, missing-document scenarios, and audit events.
