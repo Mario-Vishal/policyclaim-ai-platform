@@ -1,0 +1,7 @@
+{
+  "name": "policyclaim-ai-platform",
+  "framework": "nextjs",
+  "rootDirectory": "apps/web",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install"
+}

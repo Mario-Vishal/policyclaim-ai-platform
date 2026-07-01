@@ -5,3 +5,5 @@
 - Chose a polyglot monorepo to demonstrate a realistic enterprise split: Next.js web, .NET claims API, FastAPI AI service, shared contracts, evals, and infrastructure.
 - Targeted Vercel for the public web app and Azure Container Apps for backend services, matching the requested deployment profile while keeping local Docker Compose support.
 - Kept OpenAI usage backend-only and required deterministic fallback mode when credentials are absent so the demo remains recruiter-safe and locally runnable.
+- Built the web app as a static-friendly Next.js App Router experience backed by synthetic client-side data first, so Vercel can host a recruiter-safe demo even before cloud backend credentials are configured.
+- Used shadcn-style local UI primitives instead of generated component dependencies to keep the design system auditable and lightweight while preserving the requested dashboard feel.
