@@ -6,7 +6,7 @@ PolicyClaim AI Platform is a recruiter-facing enterprise insurance demo that com
 
 Live demo: pending Vercel deployment
 
-GitHub: pending repository creation
+GitHub: https://github.com/Mario-Vishal/policyclaim-ai-platform
 
 ## Architecture
 
@@ -48,6 +48,14 @@ Separate service commands:
 cd apps/web && npm install && npm run dev
 cd apps/api && dotnet restore && dotnet run
 cd apps/ai-service && pip install -r requirements.txt && uvicorn app.main:app --reload
+```
+
+For Python development, use a virtual environment before installing service dependencies:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r apps/ai-service/requirements.txt
 ```
 
 ## Environment Variables
@@ -96,6 +104,19 @@ vercel --prod
 ```
 
 Azure Container Apps instructions are in `infra/azure-container-apps/README.md`.
+
+## Verification
+
+Latest local verification:
+
+- `cd apps/web && npm run lint`
+- `cd apps/web && npm run build`
+- `cd apps/web && npm run test:e2e`
+- `cd apps/ai-service && python -m pytest`
+- `cd packages/evals && python run_evals.py && python -m pytest`
+- `docker compose -f infra/docker-compose.yml config`
+
+Blocked locally: `dotnet test apps/api/PolicyClaim.sln` because the .NET SDK is not installed or not on PATH on this machine.
 
 ## Screenshots
 

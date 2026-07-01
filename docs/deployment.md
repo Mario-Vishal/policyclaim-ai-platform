@@ -10,6 +10,8 @@ vercel deploy
 vercel --prod
 ```
 
+Set `NEXT_PUBLIC_API_BASE_URL` to the external Azure Container Apps URL for `policyclaim-api` after backend deployment.
+
 ## Backend: Azure Container Apps
 
 Detailed commands and resource naming are in `infra/azure-container-apps/README.md`.
