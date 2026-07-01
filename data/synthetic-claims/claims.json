@@ -1,0 +1,18 @@
+[
+  {
+    "claim_id": "CLM-10482",
+    "policy_id": "POL-AZ-7721",
+    "loss_type": "Collision",
+    "state": "AZ",
+    "amount": 18420,
+    "missing_documents": ["repair estimate supplement"]
+  },
+  {
+    "claim_id": "CLM-10484",
+    "policy_id": "POL-NV-4420",
+    "loss_type": "Rental reimbursement",
+    "state": "NV",
+    "amount": 3100,
+    "missing_documents": ["rental agreement", "police report"]
+  }
+]

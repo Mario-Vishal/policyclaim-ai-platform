@@ -1,0 +1,14 @@
+[
+  {
+    "rule_id": "RULE-AZ-UNDERWRITING-01",
+    "state": "AZ",
+    "risk_category": "medium",
+    "condition": "covered claim with missing repair supplement"
+  },
+  {
+    "rule_id": "RULE-NV-RENTAL-01",
+    "state": "NV",
+    "risk_category": "high",
+    "condition": "rental reimbursement claim without endorsement or agreement"
+  }
+]

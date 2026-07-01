@@ -1,0 +1,14 @@
+[
+  {
+    "payment_id": "PAY-8841",
+    "claim_id": "CLM-10482",
+    "status": "Pending reconciliation",
+    "amount": 17670
+  },
+  {
+    "payment_id": "PAY-8843",
+    "claim_id": "CLM-10484",
+    "status": "Exception",
+    "amount": 0
+  }
+]

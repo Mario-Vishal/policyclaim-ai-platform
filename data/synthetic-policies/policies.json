@@ -1,0 +1,16 @@
+[
+  {
+    "policy_id": "POL-AZ-7721",
+    "state": "AZ",
+    "effective_date": "2026-01-01",
+    "coverage": ["Collision", "Comprehensive", "Rental reimbursement"],
+    "exclusions": ["Commercial delivery use", "Intentional damage"]
+  },
+  {
+    "policy_id": "POL-NV-4420",
+    "state": "NV",
+    "effective_date": "2026-03-01",
+    "coverage": ["Liability", "Collision"],
+    "exclusions": ["Rental reimbursement without endorsement"]
+  }
+]

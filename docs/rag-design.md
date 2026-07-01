@@ -23,3 +23,5 @@ Metadata fields include `policy_id`, `claim_id`, `document_type`, `coverage_type
 GraphRAG-lite relationships are modeled as JSON relationship maps:
 
 `Policy -> Coverage -> Exclusion -> Claim -> Payment -> ReviewerDecision`
+
+The local implementation uses deterministic hashed embeddings for stable test runs. Production deployments can switch ingestion to OpenAI embeddings by configuring `OPENAI_API_KEY` and `OPENAI_EMBEDDING_MODEL`, then storing vectors in the `document_chunks.embedding` pgvector column.
