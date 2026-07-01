@@ -1,0 +1,22 @@
+properties:
+  configuration:
+    ingress:
+      external: false
+      targetPort: 8000
+    secrets:
+      - name: openai-api-key
+        value: "<set-in-azure>"
+  template:
+    containers:
+      - name: policyclaim-ai-service
+        image: policyclaimregistry.azurecr.io/policyclaim-ai-service:latest
+        env:
+          - name: OPENAI_API_KEY
+            secretRef: openai-api-key
+          - name: OPENAI_MODEL
+            value: gpt-4.1-mini
+          - name: OPENAI_EMBEDDING_MODEL
+            value: text-embedding-3-small
+        resources:
+          cpu: 0.5
+          memory: 1Gi

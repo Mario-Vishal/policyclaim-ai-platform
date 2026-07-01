@@ -1,0 +1,71 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "true"
+  DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+
+stages:
+  - stage: Validate
+    jobs:
+      - job: Web
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: "22.x"
+          - script: |
+              cd apps/web
+              npm ci
+              npm run lint
+              npm run build
+            displayName: Validate web
+
+      - job: Api
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              packageType: sdk
+              version: "8.0.x"
+          - script: |
+              cd apps/api
+              dotnet restore PolicyClaim.sln
+              dotnet test PolicyClaim.sln --configuration Release
+            displayName: Validate API
+
+      - job: AiService
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "3.12"
+          - script: |
+              cd apps/ai-service
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+              python -m pytest
+            displayName: Validate AI service
+
+      - job: Evals
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "3.12"
+          - script: |
+              cd packages/evals
+              python run_evals.py
+              python -m pytest
+            displayName: Run eval harness
+
+  - stage: BuildImages
+    dependsOn: Validate
+    jobs:
+      - job: Docker
+        steps:
+          - script: |
+              docker build -f apps/api/Dockerfile -t policyclaim-api:$(Build.SourceVersion) .
+              docker build -f apps/ai-service/Dockerfile -t policyclaim-ai-service:$(Build.SourceVersion) .
+            displayName: Build backend images

@@ -1,0 +1,75 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-policyclaim}
+      POSTGRES_USER: ${POSTGRES_USER:-policyclaim}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-policyclaim}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ../data/seed-scripts/seed_pgvector.sql:/docker-entrypoint-initdb.d/001_seed_pgvector.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U policyclaim -d policyclaim"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ai-service:
+    build:
+      context: ..
+      dockerfile: apps/ai-service/Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      DATABASE_URL: ${DATABASE_URL:-postgresql://policyclaim:policyclaim@postgres:5432/policyclaim}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      AI_SERVICE_BASE_URL: http://ai-service:8000
+      DATABASE_URL: ${DATABASE_URL:-postgresql://policyclaim:policyclaim@postgres:5432/policyclaim}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379}
+    ports:
+      - "5088:8080"
+    depends_on:
+      - ai-service
+
+  web:
+    build:
+      context: ../apps/web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5088}
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:5088}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  postgres-data:

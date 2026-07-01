@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: policyclaim-ai-service
+  namespace: policyclaim
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: policyclaim-ai-service
+  template:
+    metadata:
+      labels:
+        app: policyclaim-ai-service
+    spec:
+      containers:
+        - name: ai-service
+          image: policyclaimregistry.azurecr.io/policyclaim-ai-service:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: policyclaim-secrets
+                  key: openai-api-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: policyclaim-ai-service
+  namespace: policyclaim
+spec:
+  selector:
+    app: policyclaim-ai-service
+  ports:
+    - port: 8000
+      targetPort: 8000
