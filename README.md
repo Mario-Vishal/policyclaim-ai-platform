@@ -8,7 +8,7 @@ It is also structured as a reference project for learning how product workflows,
 
 The public demo runs a lightweight recruiter-safe deployment profile, while the repository includes Docker, Azure DevOps, Azure Container Apps, and AKS-ready configuration to demonstrate production deployment readiness.
 
-Live demo: pending Vercel deployment
+Live demo: https://policyclaim-ai-platform.vercel.app
 
 GitHub: https://github.com/Mario-Vishal/policyclaim-ai-platform
 
