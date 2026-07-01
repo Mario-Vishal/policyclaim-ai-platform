@@ -1,0 +1,36 @@
+openapi: 3.0.3
+info:
+  title: PolicyClaim API
+  version: 0.1.0
+paths:
+  /api/claims:
+    get:
+      summary: List synthetic claims
+      responses:
+        "200":
+          description: Claims returned
+    post:
+      summary: Create synthetic claim
+      responses:
+        "201":
+          description: Claim created
+  /api/claims/{id}:
+    get:
+      summary: Get claim by id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Claim returned
+        "404":
+          description: Claim not found
+  /api/ai/ask:
+    post:
+      summary: Ask AI through backend proxy
+      responses:
+        "200":
+          description: AI answer with citations and trace
