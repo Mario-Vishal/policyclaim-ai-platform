@@ -112,11 +112,12 @@ Latest local verification:
 - `cd apps/web && npm run lint`
 - `cd apps/web && npm run build`
 - `cd apps/web && npm run test:e2e`
+- `cd apps/api && dotnet test PolicyClaim.sln`
 - `cd apps/ai-service && python -m pytest`
 - `cd packages/evals && python run_evals.py && python -m pytest`
 - `docker compose -f infra/docker-compose.yml config`
 
-Blocked locally: `dotnet test apps/api/PolicyClaim.sln` because the .NET SDK is not installed or not on PATH on this machine.
+Local tooling installed on this workstation includes Node.js/npm, Docker, Python, GitHub CLI, Vercel CLI, .NET 8 SDK, and Azure CLI.
 
 ## Screenshots
 

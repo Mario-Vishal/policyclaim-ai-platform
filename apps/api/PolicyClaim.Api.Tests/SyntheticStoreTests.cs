@@ -1,4 +1,5 @@
 using PolicyClaim.Api.Services;
+using Xunit;
 
 namespace PolicyClaim.Api.Tests;
 

@@ -10,5 +10,6 @@
 - Added the FastAPI AI service with `/rag/ask`, `/rag/ingest`, `/rag/trace/{trace_id}`, tool endpoints, eval endpoints, deterministic fallback answers, prompt-injection blocking, PII redaction, citation validation, hybrid retrieval, reranking, context packing, trace logging, pytest tests, and pgvector seed schema.
 - Added the standalone eval harness under `packages/evals` with JSON cases, metrics scoring, generated latest-results output, and pytest smoke coverage.
 - Added Dockerfiles, Docker Compose, Azure DevOps pipeline, Azure Container Apps templates and instructions, AKS-ready manifests, and deployment docs.
-- Final verification passed for web lint/build, Playwright happy path, FastAPI pytest, eval harness pytest, live FastAPI `/health`, live `/rag/ask` fallback response with citations and trace, and Docker Compose config validation.
-- Remaining local blocker: `dotnet test apps/api/PolicyClaim.sln` cannot run until the .NET 8 SDK is installed or added to PATH.
+- Final verification passed for web lint/build, Playwright happy path, .NET API xUnit tests, FastAPI pytest, eval harness pytest, live FastAPI `/health`, live `/rag/ask` fallback response with citations and trace, and Docker Compose config validation.
+- Installed .NET 8 SDK and Azure CLI locally with `winget`. The current Codex process may need absolute paths until its inherited PATH is refreshed, but new terminals should pick up the installers' PATH changes.
+- Fixed the API project so it no longer compiles nested test files as production source, and added an explicit xUnit import in the test file.
