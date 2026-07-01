@@ -4,6 +4,10 @@ Claims, Underwriting & Payment Review System
 
 PolicyClaim AI Platform is a recruiter-facing enterprise insurance demo that combines a polished Next.js product experience with a .NET 8 API, a FastAPI RAG and agent service, synthetic insurance data, evals, and deployment-ready infrastructure.
 
+It is also structured as a reference project for learning how product workflows, backend APIs, AI retrieval systems, guardrails, evals, CI/CD, and cloud deployment pieces fit together in one production-style application.
+
+The public demo runs a lightweight recruiter-safe deployment profile, while the repository includes Docker, Azure DevOps, Azure Container Apps, and AKS-ready configuration to demonstrate production deployment readiness.
+
 Live demo: pending Vercel deployment
 
 GitHub: https://github.com/Mario-Vishal/policyclaim-ai-platform
@@ -20,8 +24,6 @@ flowchart LR
   Ai --> OpenAI[OpenAI API]
   Api --> Audit[Audit + Review Events]
 ```
-
-The public demo runs a lightweight recruiter-safe deployment profile, while the repository includes Docker, Azure DevOps, Azure Container Apps, and AKS-ready configuration to demonstrate production deployment readiness.
 
 ## Modes
 
@@ -122,7 +124,3 @@ Local tooling installed on this workstation includes Node.js/npm, Docker, Python
 ## Screenshots
 
 Screenshots should be added after Vercel deployment.
-
-## Why This Project Matters
-
-The project demonstrates production ownership across product UX, typed APIs, AI platform engineering, guardrails, evals, observability, CI/CD, and cloud deployment readiness for modern insurance technology teams.
