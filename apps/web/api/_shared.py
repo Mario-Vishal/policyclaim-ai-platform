@@ -128,30 +128,53 @@ def call_openai(question: str, citations: list[dict[str, Any]], tools: list[dict
         )
 
     context = "\n".join(f"[{item['document_id']}] {item['section_title']}: {item['snippet']}" for item in citations)[:5000]
-    payload = {
-        "model": os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
-        "messages": [
-            {"role": "system", "content": "You are a careful insurance claim review assistant. Use only provided synthetic context. Include citations by document id. Do not invent personal data."},
-            {"role": "user", "content": f"Question: {question}\n\nContext:\n{context}\n\nTool outputs:\n{json.dumps(tools)}"},
-        ],
-        "max_tokens": 450,
-        "temperature": 0.2,
-    }
-    request = urllib.request.Request(
-        OPENAI_URL,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=20) as response:
-            body = json.loads(response.read().decode("utf-8"))
-            return body["choices"][0]["message"]["content"], "openai"
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")[:500]
-        return f"Fallback mode: OpenAI request failed in the live Python backend (HTTP {exc.code}: {detail}). Synthetic citations are still available.", "fallback"
-    except Exception as exc:
-        return f"Fallback mode: OpenAI request failed in the live Python backend ({type(exc).__name__}). Synthetic citations are still available.", "fallback"
+    configured_model = os.getenv("OPENAI_MODEL", "").strip()
+    candidates = [
+        configured_model,
+        "gpt-4.1-nano",
+        "gpt-4.1-mini",
+        "gpt-4o-mini",
+        "gpt-3.5-turbo",
+        "gpt-5-nano",
+        "gpt-5-mini",
+        "gpt-5.4-nano",
+        "gpt-5.4-mini",
+        "gpt-4o",
+    ]
+    seen: set[str] = set()
+    errors: list[str] = []
+    for model in [item for item in candidates if item and not (item in seen or seen.add(item))]:
+        payload = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": "You are a careful insurance claim review assistant. Use only provided synthetic context. Include citations by document id. Do not invent personal data."},
+                {"role": "user", "content": f"Question: {question}\n\nContext:\n{context}\n\nTool outputs:\n{json.dumps(tools)}"},
+            ],
+            "max_tokens": 450,
+            "temperature": 0.2,
+        }
+        request = urllib.request.Request(
+            OPENAI_URL,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=20) as response:
+                body = json.loads(response.read().decode("utf-8"))
+                return f"{body['choices'][0]['message']['content']}\n\nModel used: {model}", "openai"
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:500]
+            errors.append(f"{model}: HTTP {exc.code}: {detail}")
+            if "invalid model ID" in detail or "model_not_found" in detail or exc.code == 404:
+                continue
+            return f"Fallback mode: OpenAI request failed in the live Python backend ({errors[-1]}). Synthetic citations are still available.", "fallback"
+        except Exception as exc:
+            return f"Fallback mode: OpenAI request failed in the live Python backend ({type(exc).__name__}). Synthetic citations are still available.", "fallback"
+    if errors:
+        return f"Fallback mode: none of the configured low-cost OpenAI model candidates worked. Last error: {errors[-1]}. Synthetic citations are still available.", "fallback"
+    except_marker = "no model candidates"
+    return f"Fallback mode: OpenAI request failed in the live Python backend ({except_marker}). Synthetic citations are still available.", "fallback"
 
 
 def build_trace(started: float, citations: list[dict[str, Any]], mode: str, pii_findings: list[str]) -> list[dict[str, Any]]:
