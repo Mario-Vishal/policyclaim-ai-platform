@@ -4,6 +4,7 @@ import json
 import os
 import re
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -146,6 +147,9 @@ def call_openai(question: str, citations: list[dict[str, Any]], tools: list[dict
         with urllib.request.urlopen(request, timeout=20) as response:
             body = json.loads(response.read().decode("utf-8"))
             return body["choices"][0]["message"]["content"], "openai"
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[:500]
+        return f"Fallback mode: OpenAI request failed in the live Python backend (HTTP {exc.code}: {detail}). Synthetic citations are still available.", "fallback"
     except Exception as exc:
         return f"Fallback mode: OpenAI request failed in the live Python backend ({type(exc).__name__}). Synthetic citations are still available.", "fallback"
 
