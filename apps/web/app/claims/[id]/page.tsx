@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
+import { ClaimReviewActions } from "@/components/claim-review-actions";
 import { StatusPill } from "@/components/status-pill";
-import { Button } from "@/components/ui/button";
 import { Card, CardText, CardTitle } from "@/components/ui/card";
 import { auditEvents, claims, policies } from "@/lib/data";
 
@@ -28,11 +28,7 @@ export default async function ClaimDetailPage({ params }: { params: Promise<{ id
             <div><dt className="text-xs text-muted-foreground">Risk</dt><dd><StatusPill value={claim.risk} /></dd></div>
             <div><dt className="text-xs text-muted-foreground">Payment</dt><dd>{claim.paymentStatus}</dd></div>
           </dl>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button className="bg-success text-white hover:text-white">Approve</Button>
-            <Button>Reject</Button>
-            <Button className="border-warning text-warning">Escalate</Button>
-          </div>
+          <ClaimReviewActions claimId={claim.id} policyId={claim.policyId} lossType={claim.lossType} />
         </Card>
         <Card>
           <CardTitle>Policy Coverage</CardTitle>

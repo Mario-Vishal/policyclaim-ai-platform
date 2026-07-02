@@ -8,7 +8,9 @@ const tone: Record<string, string> = {
   "Needs Review": "border-warning/40 bg-warning/10 text-warning",
   Escalated: "border-danger/40 bg-danger/10 text-danger",
   Matched: "border-success/40 bg-success/10 text-success",
-  Exception: "border-danger/40 bg-danger/10 text-danger"
+  Exception: "border-danger/40 bg-danger/10 text-danger",
+  "Ready for disbursement": "border-success/40 bg-success/10 text-success",
+  Hold: "border-warning/40 bg-warning/10 text-warning"
 };
 
 export function StatusPill({ value }: { value: string }) {

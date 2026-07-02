@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { BarChart3, ClipboardCheck, FileSearch, GitBranch, History, LayoutDashboard, WalletCards } from "lucide-react";
+import { BarChart3, BookOpen, ClipboardCheck, FileSearch, GitBranch, History, LayoutDashboard, WalletCards } from "lucide-react";
 
 const nav = [
+  { href: "/guide", label: "Guide", icon: BookOpen },
   { href: "/claims", label: "Claims", icon: LayoutDashboard },
   { href: "/policies", label: "Policies", icon: FileSearch },
   { href: "/underwriting", label: "Underwriting", icon: ClipboardCheck },

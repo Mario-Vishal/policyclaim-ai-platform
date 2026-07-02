@@ -6,7 +6,7 @@ PolicyClaim AI Platform is a recruiter-facing enterprise insurance demo that com
 
 It is also structured as a reference project for learning how product workflows, backend APIs, AI retrieval systems, guardrails, evals, CI/CD, and cloud deployment pieces fit together in one production-style application.
 
-The public demo runs a lightweight recruiter-safe deployment profile, while the repository includes Docker, Azure DevOps, Azure Container Apps, and AKS-ready configuration to demonstrate production deployment readiness.
+The public demo runs a lightweight recruiter-safe deployment profile with Vercel-hosted Python API routes and synthetic data, while the repository includes Docker, Azure DevOps, Azure Container Apps, and AKS-ready configuration to demonstrate production deployment readiness.
 
 Live demo: https://policyclaim-ai-platform.vercel.app
 
@@ -30,6 +30,8 @@ flowchart LR
 Business Mode covers claim intake, policy search, coverage review, underwriting risk checks, payment reconciliation, reviewer queue management, and audit history.
 
 Engineering Mode visualizes the AI system behind the workflow: RAG pipeline replay, tool-call timeline, hybrid retrieval, reranking, context packing, guardrails, citations, eval metrics, and latency waterfalls.
+
+The Guide page gives reviewers a suggested path through the live demo: start with a claim, run AI review, record a decision, then inspect Engineering Mode.
 
 ## Tech Stack
 
@@ -87,7 +89,9 @@ OpenAI keys are used only by backend services. The web app never receives the AP
 
 ## RAG Pipeline
 
-Document ingestion performs contextual chunking, metadata extraction, embeddings, pgvector storage, keyword search, vector search, hybrid merge, reranking, context packing, answer generation, grounded citations, guardrail checks, output validation, and trace logging. When `OPENAI_API_KEY` is missing, the service uses deterministic fallback responses and labels traces as fallback mode.
+Document ingestion performs contextual chunking, metadata extraction, embeddings, pgvector storage, keyword search, vector search, hybrid merge, reranking, context packing, answer generation, grounded citations, guardrail checks, output validation, and trace logging.
+
+The live Vercel demo includes Python API routes that search a generated synthetic corpus of 144 claims, 72 policies, 378 audit events, and 96 RAG chunks. `/api/rag-ask` calls OpenAI when `OPENAI_API_KEY` is configured and clearly labels fallback mode when it is not.
 
 ## Eval Harness
 
@@ -101,6 +105,8 @@ Vercel:
 cd apps/web
 vercel link
 vercel env add NEXT_PUBLIC_API_BASE_URL
+vercel env add OPENAI_API_KEY
+vercel env add OPENAI_MODEL
 vercel deploy
 vercel --prod
 ```

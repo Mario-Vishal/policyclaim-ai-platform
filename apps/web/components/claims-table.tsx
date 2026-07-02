@@ -4,7 +4,7 @@ import { StatusPill } from "@/components/status-pill";
 
 export function ClaimsTable() {
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-card">
+    <div className="max-h-[760px] overflow-auto rounded-lg border border-border bg-card">
       <table className="w-full text-left text-sm">
         <thead className="bg-muted text-xs uppercase text-muted-foreground">
           <tr>

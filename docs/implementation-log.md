@@ -14,3 +14,6 @@
 - Installed .NET 8 SDK and Azure CLI locally with `winget`. The current Codex process may need absolute paths until its inherited PATH is refreshed, but new terminals should pick up the installers' PATH changes.
 - Fixed the API project so it no longer compiles nested test files as production source, and added an explicit xUnit import in the test file.
 - Expanded synthetic demo data across the web app, .NET API, FastAPI RAG chunks, AI tool mappings, and seed JSON files to cover more states, claim types, payment statuses, missing-document scenarios, and audit events.
+- Added a deterministic synthetic-data generator that produces 144 claims, 72 policies, 378 audit events, 144 payments, and 96 RAG chunks for the public demo corpus.
+- Added Vercel Python API routes for live demo behavior: `/api/rag-ask`, `/api/claim-action`, and `/api/evals-latest`. The RAG route calls OpenAI when `OPENAI_API_KEY` is configured and labels fallback mode when it is not.
+- Added a Guide page and wired claim detail actions to the live Python backend.

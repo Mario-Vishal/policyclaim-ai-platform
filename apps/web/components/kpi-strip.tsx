@@ -1,10 +1,11 @@
 import { Card } from "@/components/ui/card";
+import { claims } from "@/lib/data";
 
 const kpis = [
-  ["Claims in review", "37", "+12%"],
-  ["AI citation accuracy", "88%", "+4 pts"],
-  ["Human override rate", "7%", "-2 pts"],
-  ["Payment exceptions", "5", "-3"]
+  ["Synthetic claims", claims.length.toString(), "live corpus"],
+  ["In review", claims.filter((claim) => claim.status === "Needs Review").length.toString(), "triage"],
+  ["Escalated", claims.filter((claim) => claim.status === "Escalated").length.toString(), "reviewer queue"],
+  ["Payment exceptions", claims.filter((claim) => claim.paymentStatus === "Exception").length.toString(), "exceptions"]
 ];
 
 export function KpiStrip() {

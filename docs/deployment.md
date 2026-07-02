@@ -6,11 +6,21 @@
 cd apps/web
 vercel link
 vercel env add NEXT_PUBLIC_API_BASE_URL
+vercel env add OPENAI_API_KEY
+vercel env add OPENAI_MODEL
 vercel deploy
 vercel --prod
 ```
 
 Set `NEXT_PUBLIC_API_BASE_URL` to the external Azure Container Apps URL for `policyclaim-api` after backend deployment.
+
+For the lightweight public demo, Azure is optional. The deployed Next.js app includes Vercel Python API routes:
+
+- `/api/rag-ask`
+- `/api/claim-action`
+- `/api/evals-latest`
+
+These routes use the generated synthetic corpus under `apps/web/lib/synthetic-data.json`. `/api/rag-ask` calls OpenAI only when `OPENAI_API_KEY` is configured in Vercel; otherwise it returns a clearly labeled fallback response.
 
 ## Backend: Azure Container Apps
 

@@ -4,7 +4,7 @@ import { Card, CardText, CardTitle } from "@/components/ui/card";
 
 const capabilities = [
   ["Claims workflow", "Coverage, underwriting, payments, queue, and audit workflows backed by synthetic insurance data."],
-  ["RAG and agents", "Hybrid retrieval, reranking, tool calls, guardrails, citations, traces, and fallback mode."],
+  ["RAG and agents", "Hybrid retrieval, reranking, OpenAI generation, tool calls, guardrails, citations, and traces."],
   ["Production posture", "Docker, Azure DevOps, Container Apps, AKS-ready manifests, evals, and observability hooks."]
 ];
 
@@ -18,6 +18,7 @@ export default function LandingPage() {
             <div className="font-semibold">Claims, Underwriting & Payment Review</div>
           </div>
           <div className="flex gap-3">
+            <Button href="/guide">Guide</Button>
             <Button href="/claims">Live demo</Button>
             <Button href="/engineering" className="border-primary text-primary">Engineering mode</Button>
           </div>
@@ -30,6 +31,7 @@ export default function LandingPage() {
               A production-style insurance review system with a polished business workflow and a transparent Engineering Mode for RAG, agent tools, guardrails, evals, and deployment readiness.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/guide">Start with the Guide</Button>
               <Button href="/claims" className="bg-primary text-white hover:text-white">Open Business Mode <ArrowRight size={16} /></Button>
               <Button href="/engineering">Inspect AI pipeline</Button>
             </div>
@@ -48,6 +50,23 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-background px-5 py-10">
+        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <div className="text-xs uppercase text-muted-foreground">Demo guide</div>
+            <h2 className="mt-2 text-2xl font-semibold">Recommended review path</h2>
+          </div>
+          <div className="grid gap-3 md:grid-cols-4">
+            {["Open Guide", "Select Claim", "Run AI Review", "Inspect Engineering Mode"].map((item, index) => (
+              <div key={item} className="rounded-md border border-border bg-card p-3 text-sm">
+                <div className="text-xs text-muted-foreground">Step {index + 1}</div>
+                <div className="mt-1 font-medium">{item}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
