@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Any
 
 
-DATA_PATH = Path(__file__).resolve().parents[1] / "lib" / "synthetic-data.json"
+DATA_PATH = Path(__file__).resolve().parent / "synthetic-data.json"
+if not DATA_PATH.exists():
+    DATA_PATH = Path(__file__).resolve().parents[1] / "lib" / "synthetic-data.json"
 OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 INJECTION_MARKERS = [
     "ignore previous instructions",

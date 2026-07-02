@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import time
+import os
+import sys
 from http.server import BaseHTTPRequestHandler
 from uuid import uuid4
 
+sys.path.insert(0, os.path.dirname(__file__))
 from _shared import build_trace, call_openai, has_prompt_injection, read_json, redact_pii, retrieve, send_json, tool_outputs
 
 

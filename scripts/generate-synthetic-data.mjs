@@ -157,6 +157,7 @@ const payload = {
 
 const targets = [
   "apps/web/lib/synthetic-data.json",
+  "apps/web/api/synthetic-data.json",
   "data/synthetic-demo-corpus.json"
 ];
 

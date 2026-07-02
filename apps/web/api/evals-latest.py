@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import os
+import sys
 from http.server import BaseHTTPRequestHandler
 
+sys.path.insert(0, os.path.dirname(__file__))
 from _shared import load_data, send_json
 
 
